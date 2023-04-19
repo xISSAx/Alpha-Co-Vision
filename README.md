@@ -133,4 +133,3 @@ Thank you to Cohere AI for their unwavering support and motivation throughout th
 7. Ability to fine-tune LLMs
 8. CPU & ‘Cuda’ Support
 9. Ability to Switch between **Full-precision & Half-precision.**
-10. 
