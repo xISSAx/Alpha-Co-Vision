@@ -54,6 +54,8 @@ You can install the required packages using the following command:
         `python main.py`
         
     2. Press ‘q’ on the ‘Camera Window’ to quit.
+ 3. Have fun! Make sure to do some activity for the camera for maximum fun! Show your surroundings, more objects, people, or pets! Also, overtime it increases its understanding of your surroundings and would keep generating better & better outputs.
+ 
 - Optional Tweaks:
     - Tweak LLMS outputs: `def process_frame(frame):` `current_time - last_generation_time >= 3` for more or less LLM generations. Optimal ‘captions > 2 .’
     - Tweak Captions outputs: `def main_loop():` `current_time - last_process_time >= 2:` to generate more or less image processing (captions) ‘2’ = optimal, ‘0’ = realtime
@@ -129,3 +131,4 @@ Thank you to Cohere AI for their unwavering support and motivation throughout th
 7. Ability to fine-tune LLMs
 8. CPU & ‘Cuda’ Support
 9. Ability to Switch between **Full-precision & Half-precision.**
+10. 
