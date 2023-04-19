@@ -13,7 +13,7 @@ The main goal of this project was to efficiently run a VideoFrames-To-Text Multi
 
 The project is currently under development and will improve over time with more support for other Chat models, such as GPT-4 and GPT-3.5 Turbo and locally running LLMs like LlaMa and Alpaca.
 
-This was hacked in a couple of nights and maybe optimized incorrectly/poorly. Moreover, this project is for educational purposes only. Future updates, with the with growing community support, will include ‘Cuda ‘ support, voice support, GPT-3.5 and GPT-4 for extended generations with Chat Support, and much more.
+This was hacked in a couple of nights and maybe optimized incorrectly/poorly. Moreover, this project is for educational purposes only. Future updates, with growing community support, will include ‘Cuda ‘ support, voice input/output support, GPT-3.5 and GPT-4 for extended generations with Chat Support, and much more.
 
 ## Requirements
 
