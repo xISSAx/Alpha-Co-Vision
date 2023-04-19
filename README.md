@@ -9,11 +9,11 @@ Powered by Salesforce BLIP (Bootstrapping Language-Image Pre-training) and Coher
 
 Alpha-Co-Vision is the first step in a series of upcoming projects focused on real-time generations to ultimately create a Pet-Toy-Robot capable of understanding its environment to better interact with humans.
 
-The main goal of this project was to efficiently run a VideoFrames-To-Text MultiModal-esk capable of understanding the world while combining it with the power of cutting-edge Large-Language-Models to better interact with the natural environment running real-time **In half-precision (`float16`)** on MacBook M1 to gain maximum performance.
+The main goal of this project was to efficiently run a VideoFrames-To-Text MultiModal-esk capable of understanding the world while combining it with the power of cutting-edge Large-Language-Models to better interact with the natural environment running BLIP in **half-precision (`float16`)** on MacBook M1 to gain maximum performance.
 
 The project is currently under development and will improve over time with more support for other Chat models, such as GPT-4 and GPT-3.5 Turbo and locally running LLMs like LlaMa and Alpaca.
 
-This was hacked in a couple of nights and maybe optimized poorly. Moreover, this project is for educational purposes only. Future versions, with the community's help, will include ‘Cuda ‘ support, voice support, GPT-3.5 and GPT-4 for extended generations with Chat Support, and much more.
+This was hacked in a couple of nights and maybe optimized incorrectly/poorly. Moreover, this project is for educational purposes only. Future updates, with the with growing community support, will include ‘Cuda ‘ support, voice support, GPT-3.5 and GPT-4 for extended generations with Chat Support, and much more.
 
 ## Requirements
 
