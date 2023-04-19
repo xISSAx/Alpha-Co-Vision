@@ -2,7 +2,7 @@
 
 ![Alpha-Co-Vision](https://user-images.githubusercontent.com/86708276/233063057-44377bf3-8392-42cc-a7f9-9935b8596632.png)
 
-A real-time video caption to conversation bot that captures frames generates captions and creates conversational responses using a Large Language Models base to create interactive video descriptions.
+A real-time video-to-text bot that captures frames generates captions and creates conversational responses using a Large Language Models base to create interactive video descriptions.
 Powered by Salesforce BLIP (Bootstrapping Language-Image Pre-training) and Cohere AI, this bot is capable of unified vision-language understanding and generation using transformers.
 
 ## Description:
