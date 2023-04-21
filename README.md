@@ -1,3 +1,9 @@
+#Updates
+- Reduced repetition: By maintaining a list of previous responses and checking the similarity between new responses and past responses, the bot is less likely to repeat itself, resulting in a more engaging and natural conversation.
+- Improved conversation quality: The updated prompt with more examples and clearer instructions helps the model understand the task better, leading to more relevant and context-aware responses.
+- Mirrored video display: Flipping the frame horizontally provides a mirrored display for the user, making it more comfortable for them to view their own video feed without affecting the input to the model.
+- Added upto Full-HD/4k support.
+
 # Alpha-Co-Vision
 
 ![Alpha-Co-Vision](https://user-images.githubusercontent.com/86708276/233063057-44377bf3-8392-42cc-a7f9-9935b8596632.png)
