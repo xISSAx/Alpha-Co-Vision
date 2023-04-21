@@ -1,9 +1,3 @@
-# ⬆️ Updates
-- Reduced repetition: By maintaining a list of previous responses and checking the similarity between new responses and past responses, the bot is less likely to repeat itself, resulting in a more engaging and natural conversation.
-- Improved conversation quality: The updated prompt with more examples and clearer instructions helps the model understand the task better, leading to more relevant and context-aware responses.
-- Mirrored video display: Flipping the frame horizontally provides a mirrored display for the user, making it more comfortable for them to view their own video feed without affecting the input to the model.
-- Added upto Full-HD/4k support.
-
 # Alpha-Co-Vision
 
 ![Alpha-Co-Vision](https://user-images.githubusercontent.com/86708276/233063057-44377bf3-8392-42cc-a7f9-9935b8596632.png)
@@ -31,17 +25,27 @@ This was hacked in a couple of nights and maybe optimized incorrectly/poorly. M
 - `transformers`
 - `OpenAI (optional)`
 
+## ⬆️ Recent Updates
+- Reduced repetition: By maintaining a list of previous responses and checking the similarity between new responses and past responses, the bot is less likely to repeat itself, resulting in a more engaging and natural conversation.
+- Improved conversation quality: The updated prompt with more examples and clearer instructions helps the model understand the task better, leading to more relevant and context-aware responses.
+- Mirrored video display: Flipping the frame horizontally provides a mirrored display for the user, making it more comfortable for them to view their own video feed without affecting the input to the model.
+- Added upto Full-HD/4k support.
+
 You can install the required packages using the following command:
 
 `pip install cohere opencv-python Pillow torch transformers openai`
 
 # Project Structure, Usage, and Customization
 
-## [🔗](https://github.com/salesforce/BLIP)  Salesforce BLIP:
+## Salesforce BLIP: [🔗](https://github.com/salesforce/BLIP) 
 
 - BLIP on Hugging Face: [🔗](https://huggingface.co/spaces/Salesforce/BLIP)
 
-## [🔗](https://cohere.ai/) Cohere AI
+## Cohere AI: [🔗](https://cohere.ai/) 
+
+- Get Your Cohere AI API Key Here 👉 https://dashboard.cohere.ai/api-keys
+- Try Cohere's Playground Here 👉 https://dashboard.cohere.ai/playground/generate
+- For Support & More Info, Join The Cohere's Incredible Discord Community: 👉 https://discord.com/invite/co-mmunity
 
 ## Project Structure
 
