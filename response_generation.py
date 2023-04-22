@@ -35,15 +35,15 @@ def generate_response(caption, previous_response, previous_responses):
     response = co.generate(
         model="command-xlarge-beta",
         prompt=prompt,
-        max_tokens=69,
-        temperature=0.69, #hehe
+        max_tokens=69, #he he
+        temperature=0.6, 
         k=0,
         stop_sequences=[],
         return_likelihoods="NONE"
     )
     new_response = response.generations[0].text.strip()
 
-    similarity_threshold = 0.7
+    similarity_threshold = 0.2
     for past_response in previous_responses:
         if check_similarity(new_response, past_response) > similarity_threshold:
             return generate_response(caption, previous_response, previous_responses)
