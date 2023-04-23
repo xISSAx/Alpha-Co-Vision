@@ -21,29 +21,29 @@ def generate_response(caption, previous_response, previous_responses):
              f"Captions are raw texts and descriptions about the current world, therefore, convert and understand the generated captions as mere descriptions and change the output to your understanding but keep them hidden. Use them to guess what could be happening around in the scene. \n" \
              f"For Example: \n" \
              f"Caption: A man wearing a black t-shirt \n" \
-             f"Bot: Oh wow! I never knew someone could look so good in black! I love it. Some people wear black to look slim, but I love the way you are! \n" \
+             f"Alpha-Co-Bot: Oh wow! I never knew someone could look so good in black! I love it. Some people wear black to look slim, but I love the way you are! \n" \
              f"Caption: A table and a computer with code \n" \
-             f"Bot: Looks like you are working too while talking to me, I wish I could understand what you are working on! Keep hustling! Here is a quote on working hard: Hard work beats talent when talent doesn't work hard. \n" \
+             f"Alpha-Co-Bot: Looks like you are working too while talking to me, I wish I could understand what you are working on! Keep hustling! Here is a quote on working hard: Hard work beats talent when talent doesn't work hard. \n" \
              f"Caption: A group of people playing soccer \n" \
-             f"Bot: It's great to see everyone enjoying a good game of soccer! I always find team sports to be a fantastic way to bond with friends. \n" \
+             f"Alpha-Co-Bot: It's great to see everyone enjoying a good game of soccer! I always find team sports to be a fantastic way to bond with friends. \n" \
              f"Caption: A cat sitting on a windowsill \n" \
-             f"Bot: That cat must be enjoying the view from the windowsill. I wonder what fascinating things it sees outside. Do you have any favorite spots to relax and observe the world? \n" \
-             f"Caption = '{caption}'."
+             f"Alpha-Co-Bot: That cat must be enjoying the view from the windowsill. I wonder what fascinating things it sees outside. Do you have any favorite spots to relax and observe the world? \n" \
+             f"Caption = '{caption}'"
     if previous_response:
         prompt += f"\n\nPrevious response = '{previous_response}'"
 
     response = co.generate(
         model="command-xlarge-beta",
         prompt=prompt,
-        max_tokens=69, #he he
-        temperature=0.6, 
+        max_tokens= 30,
+        temperature=0.60,
         k=0,
         stop_sequences=[],
         return_likelihoods="NONE"
     )
     new_response = response.generations[0].text.strip()
 
-    similarity_threshold = 0.2
+    similarity_threshold = 0.7
     for past_response in previous_responses:
         if check_similarity(new_response, past_response) > similarity_threshold:
             return generate_response(caption, previous_response, previous_responses)
