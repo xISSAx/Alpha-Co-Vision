@@ -4,7 +4,7 @@
 
 
 A real-time video-to-text bot that captures frames generates captions and creates conversational responses using a Large Language Models base to create interactive video descriptions.
-Powered by Salesforce BLIP (Bootstrapping Language-Image Pre-training) and Cohere AI, this bot is capable of unified vision-language understanding and generation using transformers.
+Powered by BLIP (Bootstrapping Language-Image Pre-training) and Cohere AI, this bot is capable of unified vision-language understanding and generation using transformers.
 
 ## Description:
 
@@ -38,7 +38,7 @@ You can install the required packages using the following command:
 
 # Project Structure, Usage, and Customization
 
-## Salesforce BLIP: [🔗](https://github.com/salesforce/BLIP) 
+## BLIP: [🔗](https://github.com/salesforce/BLIP) 
 
 - BLIP on Hugging Face: [🔗](https://huggingface.co/spaces/Salesforce/BLIP)
 
@@ -104,7 +104,7 @@ Tensorflow Model was recently added to Hugging Face. TF update coming soon. Mean
 
 1. The program captures webcam frames.
 2. Frames are converted to PIL images.
-3. Captions are generated using the Salesforce Blip model.
+3. Captions are generated using the Blip model.
 4. Conversational responses are generated based on the captions using the Cohere AI API.
 5. Captions and responses are displayed on the webcam feed in real time.
 
@@ -127,7 +127,7 @@ You can customize the bot by modifying the `Prompt` in the `response_generation
 
 ## Credits
 
-This project utilizes the Salesforce BLIP model for generating image captions. Special thanks Salesforce Research team for their work on BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation using Transformers. Their research and model have greatly contributed to developing this video caption to interaction bot.
+This project utilizes the BLIP model for generating image captions. Special thanks Salesforce's Research team for their work on BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation using Transformers. Their research and model have greatly contributed to developing this video caption to interaction bot.
 
 ## Special Thanks
 
