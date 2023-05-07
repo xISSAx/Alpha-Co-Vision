@@ -29,11 +29,13 @@ def process_frame(frame):
     global last_generation_time, previous_captions
     pil_image = convert_frame_to_pil_image(frame)
     caption = generate_caption(pil_image)
+    # print(f"caption: {caption}")
 
     current_time = time.time()  # track current time for processing time comparison
-    if current_time - last_generation_time >= 10:  # generate captions every 5 seconds
+    if current_time - last_generation_time >= 5:  # generate captions every 5 seconds
         if caption and caption not in previous_captions and caption not in sequence_list:
             sequence_list.append(('Caption', caption))  # add caption to sequence list
+            # print(f"caption append: {caption}")
             previous_captions.append(caption)  # add caption to list of previous captions
             if len(previous_captions) > 10:  # limit list of captions to 10 items
                 previous_captions.pop(0)
@@ -62,7 +64,7 @@ def get_user_input():
     sys.stdin.reconfigure(encoding='utf-8')
     sys.stdout.reconfigure(encoding='utf-8')
     while True:
-        sys.stdout.write("Ask: \n")
+        sys.stdout.write("Ask: ")
         sys.stdout.flush()
         user_input = sys.stdin.readline().strip()
         # user_input = input('What do you say now? ')

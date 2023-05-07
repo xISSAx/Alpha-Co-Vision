@@ -23,7 +23,7 @@ def generate_caption(pil_image):
             inputs = processor(pil_image, return_tensors="pt").to("mps", torch.float16)
         else:
             inputs = processor(pil_image, return_tensors="pt")
-        out = model.generate(**inputs)
+        out = model.generate(**inputs, max_new_tokens=50)
         caption = processor.decode(out[0], skip_special_tokens=True)
         previous_caption = caption
         return caption
