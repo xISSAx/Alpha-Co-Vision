@@ -21,7 +21,7 @@ last_generation_time = time.time()
 previous_captions = []  # initialize variables for tracking previous captions and responses
 previous_responses = []
 lock = threading.Lock()  # initialize lock for threading synchronization
-captions_list = []  # initialize list to hold generated captions
+sequence_list = []  # initialize list to hold generated captions, user input, and responses in sequence
 
 
 # convert frame to PIL image format and generate caption for a frame
@@ -29,13 +29,14 @@ def process_frame(frame):
     global last_generation_time, previous_captions
     pil_image = convert_frame_to_pil_image(frame)
     caption = generate_caption(pil_image)
+
     current_time = time.time()  # track current time for processing time comparison
-    if current_time - last_generation_time >= 2:  # generate captions every 5 seconds
-        if caption and caption not in previous_captions and caption not in captions_list:
-            print(f"caption: {caption}")
-            captions_list.append(caption)  # add caption to list of captions
-            if len(captions_list) > 10:  # limit list of captions to 10 items
-                captions_list.pop(0)
+    if current_time - last_generation_time >= 10:  # generate captions every 5 seconds
+        if caption and caption not in previous_captions and caption not in sequence_list:
+            sequence_list.append(('Caption', caption))  # add caption to sequence list
+            previous_captions.append(caption)  # add caption to list of previous captions
+            if len(previous_captions) > 10:  # limit list of captions to 10 items
+                previous_captions.pop(0)
         last_generation_time = current_time  # update last generation time
 
 
@@ -43,34 +44,44 @@ def display_frame(frame):
     """
     Function to display a frame on the screen and overlay the previous captions on top of it.
     """
-    global captions_list
+    global previous_captions
     with lock:  # synchronize with lock
         font = cv2.FONT_HERSHEY_SIMPLEX
         font_scale = 0.0
         thickness = 1
         color = (0, 0, 0)
         org = (10, 20)
-        captions_str = '\n'.join(captions_list)
+        captions_str = '\n'.join(previous_captions)
         cv2.putText(frame, captions_str, org, font, font_scale, color, thickness, cv2.LINE_AA)
         flipped_frame = cv2.flip(frame, 1)  # Flip the frame horizontally
         cv2.imshow('frame', flipped_frame)
 
-
 def get_user_input():
+    import sys
+    # Set the console encoding to support Chinese input
+    sys.stdin.reconfigure(encoding='utf-8')
+    sys.stdout.reconfigure(encoding='utf-8')
     while True:
-        user_input = input('What do you say now? ')
+        sys.stdout.write("Ask: \n")
+        sys.stdout.flush()
+        user_input = sys.stdin.readline().strip()
+        # user_input = input('What do you say now? ')
         if user_input:
-            response = generate_response(' '.join(captions_list), previous_response=previous_responses[len(previous_responses)-1], previous_responses=previous_responses,  user_input=user_input)
+            # user_input = user_input.encode('utf-8').decode('unicode_escape')
+            # user_input = user_input.encode('utf-8')
+            sequence_list.append(('user_input', user_input))  # add user input to sequence list
+            response = generate_response(sequence_list=sequence_list)
             # while response in previous_responses:  # ensure response is unique
-            #     response = generate_response(' '.join(captions_list), user_input)
+            #     response = generate_response(' '.join(previous_captions), user_input)
 
             previous_responses.append(response)  # add response to list of previous responses
-            if len(previous_responses) > 20:
+            sequence_list.append(('Alpha-Co-Bot', response))  # add response to sequence list
+            if len(previous_responses) > 10:
                 previous_responses.pop(0)
 
             print(response)  # print response to console
             if config.settings.edge_tts_enable:
-                edge_tts_playback.playTTS(response, config.settings.edge_tts_voice)
+                edge_tts_playback.playTTS(response.replace('Alpha-Co-Bot',''), config.settings.edge_tts_voice)
 
 
 def main_loop():
@@ -83,7 +94,7 @@ def main_loop():
             break
 
         current_time = time.time()
-        if current_time - last_process_time >= 10:  # process frame every 5 seconds
+        if current_time - last_process_time >= 5:  # process frame every 5 seconds
             t = threading.Thread(target=process_frame, args=(frame,))
             t.start()
             last_process_time = current_time
