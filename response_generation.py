@@ -12,8 +12,8 @@ def check_similarity(text1, text2):
     return similarity[0][1]
 
 
-def generate_response(caption, previous_response, previous_responses):
-    # print("generate_response")
+def generate_response(caption, previous_response, previous_responses, user_input=""):
+    print("generate_response")
     prompt = f"You are a highly intelligent, friendly bot that is living its own life. You output will be Chinese. \n" \
              f"Currently, you are connected to a model that generates captions from images.\n" \
              f"Given a caption, always use first-person phrases like I, you, me, we, etc., and interpret the generated caption to the best of your understanding as if you are talking with someone and make it conversational.\n" \
@@ -29,10 +29,11 @@ def generate_response(caption, previous_response, previous_responses):
              f"Alpha-Co-Bot: It's great to see everyone enjoying a good game of soccer! I always find team sports to be a fantastic way to bond with friends. \n" \
              f"Caption: A cat sitting on a windowsill \n" \
              f"Alpha-Co-Bot: That cat must be enjoying the view from the windowsill. I wonder what fascinating things it sees outside. Do you have any favorite spots to relax and observe the world? \n" \
-             f"Caption = '{caption}'"
+             f"Caption: '{caption}'"
     if previous_response:
         prompt += f"\n\nPrevious response = '{previous_response}'"
 
+    prompt += f"\nUser_Ask: '{user_input}'"
     if config.settings.enable_openai:
         # Load your OpenAI API key
         api_key = os.environ.get("OPENAI_API_KEY")
@@ -66,9 +67,9 @@ def generate_response(caption, previous_response, previous_responses):
         )
         new_response = response.generations[0].text.strip()
 
-    similarity_threshold = 0.7
-    for past_response in previous_responses:
-        if check_similarity(new_response, past_response) > similarity_threshold:
-            return generate_response(caption, previous_response, previous_responses)
+        similarity_threshold = 0.7
+        for past_response in previous_responses:
+            if check_similarity(new_response, past_response) > similarity_threshold:
+                return generate_response(caption, previous_response, previous_responses)
 
     return new_response
