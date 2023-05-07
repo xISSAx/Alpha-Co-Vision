@@ -28,5 +28,7 @@ def load_config(config_file):
     settings.openai_api_key = config_data["openai_api_key"]
     settings.enable_openai = config_data["enable_openai"]
     settings.enable_mps = config_data["enable_mps"]
+    settings.edge_tts_enable = config_data["edge_tts_enable"]
+    settings.edge_tts_voice = config_data["edge_tts_voice"]
 
     return settings

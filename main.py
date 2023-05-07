@@ -10,6 +10,7 @@ from image_processing import convert_frame_to_pil_image
 from caption_generation import generate_caption
 from response_generation import generate_response
 import config
+import edge_tts_playback
 
 # create VideoCapture object for camera feed
 cap = cv2.VideoCapture(0)
@@ -33,7 +34,7 @@ def process_frame(frame):
     caption = generate_caption(pil_image)
 
     current_time = time.time() # track current time for processing time comparison
-    if current_time - last_generation_time >= 3:  # generate response every 2 seconds
+    if current_time - last_generation_time >= 30:  # generate response every 2 seconds
         if caption and caption not in previous_captions:
             previous_captions.append(caption) # add caption to previous captions list
             if len(previous_captions) > 20: # limit previous captions list to 10 items
@@ -49,6 +50,8 @@ def process_frame(frame):
                 previous_responses.pop(0)
 
             print(response) # print response to console
+            if config.settings.edge_tts_enable:
+                edge_tts_playback.playTTS(response, config.settings.edge_tts_voice)
         last_generation_time = current_time # update last generation time
 
 
@@ -79,7 +82,7 @@ def main_loop():
             break
 
         current_time = time.time()
-        if current_time - last_process_time >= 1:
+        if current_time - last_process_time >= 30:
             t = threading.Thread(target=process_frame, args=(frame,))
             t.start()
             last_process_time = current_time

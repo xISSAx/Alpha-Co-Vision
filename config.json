@@ -2,5 +2,7 @@
   "cohere_api_key": "",
   "openai_api_key": "",
   "enable_openai": true,
-  "enable_mps": true
+  "enable_mps": true,
+  "edge_tts_enable": true,
+  "edge_tts_voice": "zh-CN-XiaoxiaoNeural"
 }
