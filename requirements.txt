@@ -1,0 +1,9 @@
+urllib3 == 1.26.15
+scikit-learn
+cohere
+opencv-python
+Pillow
+torch
+transformers
+openai
+argparse

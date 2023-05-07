@@ -36,6 +36,11 @@ You can install the required packages using the following command:
 
 `pip install cohere opencv-python Pillow torch transformers openai`
 
+or 
+```shell
+pip install -r requirements.txt
+```
+
 # Project Structure, Usage, and Customization
 
 ## BLIP: [🔗](https://github.com/salesforce/BLIP) 
@@ -50,7 +55,7 @@ You can install the required packages using the following command:
 
 ## Project Structure
 
-- `config.py`: Contains API keys and other configurations.
+- `config.py`: Contains API keys and other configurations, it will load the settings from config.json
 - `image_processing.py`: Contains functions related to image processing.
 - `caption_generation.py`: Contains functions related to caption generation using the Blip model.
 - `response_generation.py`: Contains functions related to response generation using the Cohere AI API.
@@ -58,11 +63,11 @@ You can install the required packages using the following command:
 
 ## Usage
 
-1. Set up your API keys in the `config.py` file: `cohere_api_key = **"YOUR_COHERE_API_KEY"**`
-2. `cohere_api_key = **"YOUR_COHERE_API_KEY"**`&  in `config.py
+1. Set up your API keys in the `config.json` file: `cohere_api_key = **"YOUR_COHERE_API_KEY"**`
+2. `cohere_api_key = **"YOUR_COHERE_API_KEY"**`&  in `config.json
     1. Run the `main.py` file:
         
-        `python main.py`
+        `python main.py --config config.json`
         
     2. Press ‘q’ on the ‘Camera Window’ to quit.
  

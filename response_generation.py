@@ -1,9 +1,9 @@
 import cohere
-from config import cohere_api_key
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-co = cohere.Client(cohere_api_key)
+import openai
+import os
+import config
 
 
 def check_similarity(text1, text2):
@@ -13,6 +13,7 @@ def check_similarity(text1, text2):
 
 
 def generate_response(caption, previous_response, previous_responses):
+    # print("generate_response")
     prompt = f"You are a highly intelligent, friendly bot that is living its own life. \n" \
              f"Currently, you are connected to a model that generates captions from images.\n" \
              f"Given a caption, always use first-person phrases like I, you, me, we, etc., and interpret the generated caption to the best of your understanding as if you are talking with someone and make it conversational.\n" \
@@ -32,16 +33,38 @@ def generate_response(caption, previous_response, previous_responses):
     if previous_response:
         prompt += f"\n\nPrevious response = '{previous_response}'"
 
-    response = co.generate(
-        model="command-xlarge-beta",
-        prompt=prompt,
-        max_tokens= 30,
-        temperature=0.60,
-        k=0,
-        stop_sequences=[],
-        return_likelihoods="NONE"
-    )
-    new_response = response.generations[0].text.strip()
+    if config.settings.enable_openai:
+        # Load your OpenAI API key
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if api_key:
+            api_key = config.settings.openai_api_key
+        openai.api_key = api_key
+        messages = [
+            {
+                "role": "system",
+                "content": f"${prompt}",
+            },
+        ]
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=1.0,
+        )
+        new_response = response.choices[0].message["content"].strip()
+        # print(f"new_response: {new_response}")
+        # print(f"Total Token: {response['usage']['total_tokens']}")
+    else:
+        co = cohere.Client(config.settings.cohere_api_key)
+        response = co.generate(
+            model="command-xlarge-beta",
+            prompt=prompt,
+            max_tokens= 30,
+            temperature=0.60,
+            k=0,
+            stop_sequences=[],
+            return_likelihoods="NONE"
+        )
+        new_response = response.generations[0].text.strip()
 
     similarity_threshold = 0.7
     for past_response in previous_responses:
