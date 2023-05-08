@@ -1,0 +1,6 @@
+{
+  "cohere_api_key": "",
+  "openai_api_key": "",
+  "enable_openai": true,
+  "enable_mps": true
+}

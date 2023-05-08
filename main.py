@@ -1,9 +1,15 @@
+import argparse
+import os.path
+
 import cv2
 import time
 import threading
+
+import caption_generation
 from image_processing import convert_frame_to_pil_image
 from caption_generation import generate_caption
 from response_generation import generate_response
+import config
 
 # create VideoCapture object for camera feed
 cap = cv2.VideoCapture(0)
@@ -87,5 +93,21 @@ def main_loop():
     cv2.destroyAllWindows()
 
 
+def setup_config(config_file):
+    if not os.path.exists(config_file):
+        raise FileNotFoundError(f"Config file {config_file} not found.")
+
+    settings = config.load_config(config_file)
+
+    # print("OpenAI API Key:", settings.openai_api_key)
+    print("Enable OpenAI:", settings.enable_openai)
+    print("Enable enable_mps:", settings.enable_mps)
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Example with config file support.")
+    parser.add_argument("--config", dest="config", default="config.json", help="Path to the config file")
+    args = parser.parse_args()
+    setup_config(args.config)
+    caption_generation.init()
+
     main_loop()
