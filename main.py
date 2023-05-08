@@ -119,6 +119,8 @@ def setup_config(config_file):
     # print("OpenAI API Key:", settings.openai_api_key)
     print("Enable OpenAI:", settings.enable_openai)
     print("Enable enable_mps:", settings.enable_mps)
+    print("openai_api_base_url:", settings.openai_api_base_url)
+    print("blip_model:", settings.blip_model)
 
 
 if __name__ == '__main__':

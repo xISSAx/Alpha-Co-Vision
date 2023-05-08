@@ -30,5 +30,7 @@ def load_config(config_file):
     settings.enable_mps = config_data["enable_mps"]
     settings.edge_tts_enable = config_data["edge_tts_enable"]
     settings.edge_tts_voice = config_data["edge_tts_voice"]
+    settings.openai_api_base_url = config_data["openai_api_base_url"]
+    settings.blip_model = config_data["blip_model"]
 
     return settings

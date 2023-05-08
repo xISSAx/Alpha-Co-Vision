@@ -40,9 +40,12 @@ def generate_response(sequence_list):
     if config.settings.enable_openai:
         # Load your OpenAI API key
         api_key = os.environ.get("OPENAI_API_KEY")
-        if api_key:
+        if not api_key:
             api_key = config.settings.openai_api_key
         openai.api_key = api_key
+        if config.settings.openai_api_base_url:
+            openai.api_base = config.settings.openai_api_base_url + "/v1"
+        # print(f"openai.api_base: {openai.api_base}")
         messages = [
             {
                 "role": "system",
