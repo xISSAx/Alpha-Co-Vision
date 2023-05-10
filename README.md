@@ -36,6 +36,11 @@ You can install the required packages using the following command:
 
 `pip install cohere opencv-python Pillow torch transformers openai`
 
+or 
+```shell
+pip install -r requirements.txt
+```
+
 # Project Structure, Usage, and Customization
 
 ## BLIP: [🔗](https://github.com/salesforce/BLIP) 
@@ -50,7 +55,7 @@ You can install the required packages using the following command:
 
 ## Project Structure
 
-- `config.py`: Contains API keys and other configurations.
+- `config.py`: Contains API keys and other configurations, it will load the settings from config.json
 - `image_processing.py`: Contains functions related to image processing.
 - `caption_generation.py`: Contains functions related to caption generation using the Blip model.
 - `response_generation.py`: Contains functions related to response generation using the Cohere AI API.
@@ -58,11 +63,11 @@ You can install the required packages using the following command:
 
 ## Usage
 
-1. Set up your API keys in the `config.py` file: `cohere_api_key = **"YOUR_COHERE_API_KEY"**`
-2. `cohere_api_key = **"YOUR_COHERE_API_KEY"**`&  in `config.py
+1. Set up your API keys in the `config.json` file: `cohere_api_key = **"YOUR_COHERE_API_KEY"**`
+2. `cohere_api_key = **"YOUR_COHERE_API_KEY"**`&  in `config.json
     1. Run the `main.py` file:
         
-        `python main.py`
+        `python main.py --config config.json`
         
     2. Press ‘q’ on the ‘Camera Window’ to quit.
  
@@ -132,6 +137,61 @@ This project utilizes the BLIP model for generating image captions. Special than
 ## Special Thanks
 
 Thank you to Cohere AI for their unwavering support and motivation throughout this project. Your encouragement and cutting-edge technology have played a crucial role in our success, and I'm grateful for the opportunity to collaborate and innovate together. Here's to pushing boundaries and shaping the future of AI!
+
+## edge-tts
+- https://github.com/rany2/edge-tts
+You can choose the voices from the list, and update to `config.json`
+```shell
+edge-tts --list-voices
+
+Name: en-GB-LibbyNeural
+Gender: Female
+
+Name: en-GB-MaisieNeural
+Gender: Female
+
+Name: en-GB-RyanNeural
+Gender: Male
+
+Name: en-GB-SoniaNeural
+Gender: Female
+
+Name: en-GB-ThomasNeural
+Gender: Male
+
+Name: en-HK-SamNeural
+Gender: Male
+
+Name: en-HK-YanNeural
+Gender: Female
+
+Name: en-IE-ConnorNeural
+Gender: Male
+```
+
+
+
+## Llama Integration
+You can run the Llama with the llama-cpp-python, and it will expose the same API as OpenAI, only need to change the OpenAI Base Url.
+- https://github.com/abetlen/llama-cpp-python
+```shell
+pip install llama-cpp-python[server]
+python3 -m llama_cpp.server --model models/7B/ggml-model.bin
+```
+Then update the `openai_api_base_url` in `config.json`
+- http://localhost:8000
+```json
+{
+  "cohere_api_key": "",
+  "openai_api_key": "",
+  "enable_openai": true,
+  "openai_api_base_url": "http://localhost:8000",
+  "enable_mps": true,
+  "blip_model": "Salesforce/blip-image-captioning-base",
+  "edge_tts_enable": true,
+  "edge_tts_voice": "zh-CN-XiaoxiaoNeural"
+}
+```
 
 ## Future Updates:
 
