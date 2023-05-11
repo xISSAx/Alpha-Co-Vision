@@ -27,6 +27,7 @@ This was hacked in a couple of nights and maybe optimized incorrectly/poorly. M
 - `OpenAI (optional)`
 
 ## ⬆️ Recent Updates
+- Added an experimental feature that allows you to see responses directly on the video display. Recommended: Use ```main2exp.py```
 - Reduced repetition: By maintaining a list of previous responses and checking the similarity between new responses and past responses, the bot is less likely to repeat itself, resulting in a more engaging and natural conversation.
 - Improved conversation quality: The updated prompt with more examples and clearer instructions helps the model understand the task better, leading to more relevant and context-aware responses.
 - Mirrored video display: Flipping the frame horizontally provides a mirrored display for the user, making it more comfortable for them to view their own video feed without affecting the input to the model.
@@ -81,11 +82,10 @@ Have fun! Make sure to do some activity for the camera for maximum fun! Show you
 
 ## MacOS CPU/GPU Support:
 
-Tutorials on how to install PT and TF are coming soon. Meanwhile, follow these instructions →
+### Install PyTorch For M1:
 
-(*Option to switch between Mac CPU & GPU soon.*)
-
-### Install PyTorch For M1
+PT tutorial is live, follow these instructions to install PyTorch on Apple Silicon:
+https://medium.com/@vkkvben10/how-to-install-pytorch-on-apple-silicon-mac-m1-m2-easiest-guide-d31a7c683367
 
 Pre:  **macOS Version** PyTorch is supported on macOS 10.15 (Catalina) or above.
 
@@ -100,12 +100,14 @@ Tensorflow Model was recently added to Hugging Face. TF update coming soon. Mean
 
 [🔗](https://developer.apple.com/metal/tensorflow-plugin/) ← Follow the instructions to install TensorFlow on your own. (Currently Optional)
 
+(*Option to switch between Mac CPU & GPU soon.*)
+
 ## How it works
 
 1. The program captures webcam frames.
 2. Frames are converted to PIL images.
-3. Captions are generated using the Blip model.
-4. Conversational responses are generated based on the captions using the Cohere AI API.
+3. Captions are generated using the BLIP captioning model.
+4. Conversational responses are generated based on the captions using the Cohere AI's API.
 5. Captions and responses are displayed on the webcam feed in real time.
 
 ## Example
