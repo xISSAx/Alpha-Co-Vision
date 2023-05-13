@@ -42,7 +42,7 @@ def process_frame(frame):
         last_generation_time = current_time  # update last generation time
 
 
-def display_frame(frame):
+def display_frame_legacy(frame):
     """
     Function to display a frame on the screen and overlay the previous captions on top of it.
     """
@@ -57,6 +57,37 @@ def display_frame(frame):
         cv2.putText(frame, captions_str, org, font, font_scale, color, thickness, cv2.LINE_AA)
         flipped_frame = cv2.flip(frame, 1)  # Flip the frame horizontally
         cv2.imshow('frame', flipped_frame)
+
+def display_frame(frame):
+    """
+    Function to display a frame on the screen and overlay the previous captions on top of it.
+    """
+    with lock:  # synchronize with lock
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        color = (0, 255, 0)
+
+        if len(sequence_list) > 0:
+            captions_str = sequence_list[-1][1]  # Get the last caption in the list
+        else:
+            captions_str = "No Captions"
+
+        # Determine font size based on the height of the text
+        font_scale = 1.0
+        thickness = 2
+        org = (10, 20)
+
+        while True:
+            (text_width, text_height), _ = cv2.getTextSize(captions_str, font, font_scale, thickness)
+            if text_width <= frame.shape[1] - 20:  # Check if the text fits within the frame
+                break
+            font_scale -= 0.1
+
+        # Adjust text position to center it horizontally
+        org = ((frame.shape[1] - text_width) // 2, org[1] + text_height)
+        rotated_frame = cv2.flip(frame, 1)  # Flip the frame horizontally
+
+        cv2.putText(rotated_frame, captions_str, org, font, font_scale, color, thickness, cv2.LINE_AA)
+        cv2.imshow("frame", rotated_frame)
 
 def get_user_input():
     import sys
