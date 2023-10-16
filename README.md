@@ -1,6 +1,6 @@
 # Alpha-Co-Vision
 
-![Alpha-Co (1)](https://user-images.githubusercontent.com/86708276/233818014-d25d995c-dda5-4cc1-83d4-d94d9d83851c.png)
+https://github.com/xISSAx/Alpha-Co-Vision/assets/86708276/736978ab-5c66-4335-a2cf-2daaa64250a0
 
 
 A real-time video-to-text bot that captures frames generates captions and creates conversational responses using a Large Language Models base to create interactive video descriptions.
